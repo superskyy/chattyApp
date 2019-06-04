@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-// import {currentUser} from './currentUser.jsx';
-import {Messages} from './Messages.jsx';
+import ChatBar from './ChatBar.jsx';
+// import {Messages} from './Messages.jsx';
 
 
 class App extends Component {
@@ -10,7 +10,7 @@ class App extends Component {
   }
   render() {
     return (
-      <h1></h1>
+    	<ChatBar />
     );
   }
 }
