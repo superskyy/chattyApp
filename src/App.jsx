@@ -33,28 +33,35 @@ handleMessageKeyPress = (event) => {
 	  var username = chatbarUser.value;
 	  const oldMessages = this.state.messages;
 
+	  const newText = {
+	  	username: username,
+	  	content: msg
+	  };
+
 	  const newMessage = [
 	      ...oldMessages,
-	      {
-	        username: username,
-	        content: msg
-	      }
-	    ];
-	    // socket.send(JSON.stringify(msg));
-	    this.setState({ messages: newMessage });
-	    messageInput.value = "";
+	      newText
+	  ];
+
+	  
+	    
+    this.setState({ messages: newMessage });
+    this.socket.send(`username: ${newText.username} content: ${newText.content}`);
+
+    // this.socket.send(JSON.parse(newText));
+    messageInput.value = "";
   }
 }
 
 componentDidMount() {
-	const socket = new WebSocket('ws://localhost:3001');
+	this.socket = new WebSocket('ws://localhost:3001');
 
-	socket.onopen = () => {
-  	socket.send('something');
+	this.socket.onopen = () => {
+  	this.socket.send('Welcome To Chatty!');
 	};
-	socket.onmessage = e => {
-  console.log(e.data)
-}
+	// socket.onmessage = e => {
+ //  console.log(e.data)
+	// }
 };
 
 render() {
