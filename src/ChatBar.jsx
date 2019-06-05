@@ -6,7 +6,7 @@ function ChatBar (props) {
 			<footer className="chatbar">
 			  <input className="chatbar-username" placeholder="Your Name (Optional)" defaultValue={props.username} name="username"/>
 			  <input className="chatbar-message" placeholder="Type a message and hit ENTER" name="newMessage"/>
-				<button type="submit">Send</button>
+				<button className="button" type="submit">Send</button>
 			</footer>
 			</form> );
 }

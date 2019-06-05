@@ -2,19 +2,19 @@ import React, {Component} from 'react';
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
 
-const Msg = {
-  currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
-  messages: [
-    {
-      username: "Bob",
-      content: "Has anyone seen my marbles?",
-    },
-    {
-      username: "Anonymous",
-      content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
-    }
-  ]
-};
+// const Msg = {
+//   currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
+//   messages: [
+//     {
+//       username: "Bob",
+//       content: "Has anyone seen my marbles?",
+//     },
+//     {
+//       username: "Anonymous",
+//       content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
+//     }
+//   ]
+// };
 
 
 class App extends Component {
@@ -51,6 +51,21 @@ class App extends Component {
 	  }, 3000);
 	}
 
+	// componentDidMount() {
+	// 	const messageInput = target.elements.newMessage;
+ //    const username = target.elements.username;
+ //    const oldMessages = this.state.messages;
+ //    const newMessage = [
+ //      ...oldMessages,
+ //      {
+ //        username: username.value,
+ //        content: messageInput.value
+ //      }
+ //    ];
+ //    this.setState({ messages: newMessage });
+ //    messageInput.value = "";
+	// }
+
 	onSubmit = evt => {
     evt.preventDefault();
     const messageInput = evt.target.elements.newMessage;
@@ -66,8 +81,6 @@ class App extends Component {
     this.setState({ messages: newMessage });
     messageInput.value = "";
   };
-
-
 
   render() {
     return (
