@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
 
-
 class App extends Component {
 	constructor(props) {
     super(props);
@@ -33,22 +32,29 @@ handleMessageKeyPress = (event) => {
 	  var chatbarUser = document.getElementById('chatbar-username');
 	  var username = chatbarUser.value;
 	  const oldMessages = this.state.messages;
-	    const newMessage = [
+
+	  const newMessage = [
 	      ...oldMessages,
 	      {
 	        username: username,
 	        content: msg
 	      }
 	    ];
-	    
+	    // socket.send(JSON.stringify(msg));
 	    this.setState({ messages: newMessage });
 	    messageInput.value = "";
   }
 }
 
 componentDidMount() {
-  const url = 'wss://0.0.0.0:3001';
-	const connection = new WebSocket(url);
+	const socket = new WebSocket('ws://localhost:3001');
+
+	socket.onopen = () => {
+  	socket.send('something');
+	};
+	socket.onmessage = e => {
+  console.log(e.data)
+}
 };
 
 render() {
