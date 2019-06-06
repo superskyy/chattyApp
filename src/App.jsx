@@ -27,15 +27,10 @@ handleMessageKeyPress = (event) => {
 	  	content: msg
 	  };
 
-	  const newMessage = [
-	      ...oldMessages,
-	      newText
-	  ];
+	  const newMessage = [...oldMessages, newText];
 
-	  
-	    
+    this.socket.send(JSON.stringify(newText));
     this.setState({ messages: newMessage });
-    this.socket.send(`username: ${newText.username} content: ${newText.content}`);
 
     // this.socket.send(JSON.parse(newText));
     messageInput.value = "";
@@ -43,14 +38,26 @@ handleMessageKeyPress = (event) => {
 }
 
 componentDidMount() {
+
 	this.socket = new WebSocket('ws://localhost:3001');
 
 	this.socket.onopen = () => {
-  	this.socket.send('Welcome To Chatty!');
+		console.log("Welcome to Chatty");
+  	// this.socket.send('Welcome To Chatty!');
 	};
-	// socket.onmessage = e => {
- //  console.log(e.data)
-	// }
+	this.socket.onmessage = e => {
+  console.log(e.data)
+  const parsed = JSON.parse(e.data);
+  const oldMessages = this.state.messages;
+  const newText = {
+	  	username: parsed.username,
+	  	content: parsed.content
+	  };
+
+  const newMessage = [...oldMessages, newText];
+	// this.socket.(e.data);
+	this.setState({...this.state, messages: newMessage});
+	}
 };
 
 render() {
