@@ -15,7 +15,6 @@ class App extends Component {
 	CreateNewName = (event) => {
 		if(event.key == 'Enter') {
 			const nameInput = event.target.value;
-			console.log(nameInput);
 			const newMessage = (this.state.currentUser + " changed the username to " + nameInput);
 			const newText = {
 		  	type: "postNotification",
@@ -48,7 +47,6 @@ class App extends Component {
 			console.log("Connected to server");
 		};
 		this.socket.onmessage = e => {
-	  	console.log(e.data)
 		  const data = JSON.parse(e.data);
 			if (data.type === "incomingMessage" || data.type === "incomingNotification") {
 			  const oldMessages = this.state.messages;
@@ -60,7 +58,6 @@ class App extends Component {
 				const newMessage = [...oldMessages, newText];
 				this.setState({...this.state, messages: newMessage});
 			}
-	  	
 			if (data.type === "counter" ) {
 				this.setState({size: data.size});
 			}
