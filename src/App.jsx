@@ -65,10 +65,22 @@ class App extends Component {
 				return;
 			}
 	  	
-			if (data.type === "counter") {
+			if (data.type === "counter" || data.type === "incomingNotification") {
 				this.setState({size: data.size});
 				return;
 			}
+
+			// if (data.type === "incomingNotification") {
+			// 	const oldMessages = this.state.messages;
+			//   const newText = {
+			//   		id: data.id,
+			// 	  	username: data.username,
+			// 	  	content: data.content
+			// 	};
+			// 	const newMessage = [...oldMessages, newText];
+			// 	this.setState({...this.state, messages: newMessage});
+			// 	return;
+			// }
 			}
 	};
 	render() {
