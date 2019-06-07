@@ -56,6 +56,7 @@ class App extends Component {
 			if (data.type === "incomingMessage") {
 			  const oldMessages = this.state.messages;
 			  const newText = {
+			  		id: data.id,
 				  	username: data.username,
 				  	content: data.content
 				};
