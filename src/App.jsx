@@ -12,7 +12,7 @@ class App extends Component {
     };
   }
 
-	CreateNewName = (event) => {
+	createNewName = (event) => {
 		if(event.key == 'Enter') {
 			const nameInput = event.target.value;
 			const newMessage = (this.state.currentUser + " changed the username to " + nameInput);
@@ -71,7 +71,7 @@ class App extends Component {
 					<p className="users-online">{this.state.size} Users Online</p>
 				</nav>
 	    	<MessageList messages={this.state.messages}/>
-		  	<ChatBar username={this.state.currentUser} CreateNewName={this.CreateNewName} handleMessageKeyPress={this.handleMessageKeyPress}/> 
+		  	<ChatBar username={this.state.currentUser} CreateNewName={this.createNewName} handleMessageKeyPress={this.handleMessageKeyPress}/> 
 	  	</div>
 	  );
 	}
