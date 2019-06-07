@@ -7,37 +7,34 @@ class App extends Component {
     super(props);
     this.state = {
     	loading: true,
-    	currentUser: "Anonymous", // optional. if currentUser is not defined, it means the user is Anonymous
+    	currentUser: "Anonymous",
 		  messages: []
     };
   }
 
 	CreateNewName = (event) => {
 		if(event.key == 'Enter') {
-			const nameInput = document.getElementById('chatbar-username');
-			const newUserName = nameInput.value;
-			console.log(newUserName);
-			const newMessage = (this.state.currentUser + " changed the username to " + newUserName);
+			const nameInput = event.target.value;
+			console.log(nameInput);
+			const newMessage = (this.state.currentUser + " changed the username to " + nameInput);
 			const newText = {
 		  	type: "postNotification",
 		  	content: newMessage
 		  };
 		  this.socket.send(JSON.stringify(newText));
-			this.setState({ currentUser: newUserName });
+			this.setState({ currentUser: nameInput });
 		}
 	}
 
 	handleMessageKeyPress = (event) => {
 	  if(event.key == 'Enter'){
-	    const messageInput = document.getElementById('chatbar-msg');
-	    const msg = messageInput.value;
-		  // const chatbarUser = document.getElementById('chatbar-username');
+	    const messageInput = event.target.value;
 		  const username = this.state.currentUser;
 		  const oldMessages = this.state.messages;
 		  const newText = {
 		  	type: "postMessage",
 		  	username: username,
-		  	content: msg
+		  	content: messageInput
 		  };
 		  const newMessage = [...oldMessages, newText];
 	    this.socket.send(JSON.stringify(newText));
@@ -62,25 +59,11 @@ class App extends Component {
 				};
 				const newMessage = [...oldMessages, newText];
 				this.setState({...this.state, messages: newMessage});
-				return;
 			}
 	  	
 			if (data.type === "counter" ) {
 				this.setState({size: data.size});
-				return;
 			}
-
-			// if (data.type === "incomingNotification") {
-			// 	const oldMessages = this.state.messages;
-			//   const newText = {
-			//   		id: data.id,
-			// 	  	username: data.username,
-			// 	  	content: data.content
-			// 	};
-			// 	const newMessage = [...oldMessages, newText];
-			// 	this.setState({...this.state, messages: newMessage});
-			// 	return;
-			// }
 			}
 	};
 	render() {
