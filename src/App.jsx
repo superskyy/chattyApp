@@ -45,11 +45,6 @@ class App extends Component {
 	  }
 	}
 
-	// getUsers = () => {
-	// 	const count = JSON.parse(this.state.size);
-	// 	this.setState({size: count});
-	// }
-
 	componentDidMount() {
 		this.socket = new WebSocket('ws://localhost:3001');
 		this.socket.onopen = () => {
