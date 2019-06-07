@@ -53,7 +53,7 @@ class App extends Component {
 		this.socket.onmessage = e => {
 	  	console.log(e.data)
 		  const data = JSON.parse(e.data);
-			if (data.type === "incomingMessage") {
+			if (data.type === "incomingMessage" || data.type === "incomingNotification") {
 			  const oldMessages = this.state.messages;
 			  const newText = {
 			  		id: data.id,
@@ -65,7 +65,7 @@ class App extends Component {
 				return;
 			}
 	  	
-			if (data.type === "counter" || data.type === "incomingNotification") {
+			if (data.type === "counter" ) {
 				this.setState({size: data.size});
 				return;
 			}
